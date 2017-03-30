@@ -1,26 +1,25 @@
 "use strict";
 
-const _ = require("lodash");
+const isObject = require("lodash/fp/isObject");
+const isArray = require("lodash/fp/isArray");
+const mapKeys = require("lodash/fp/mapKeys");
 
-module.exports = function mapKeysDeepLodash(obj, cb) {
-  if (_.isUndefined(obj)) {
-    throw new Error(`map-keys-deep-lodash expects an object but got ${typeof obj}`);
-  }
+const toKeyValuePair = (obj) => (key) => ({ key, val: obj[key] });
 
-  obj = _.mapKeys(obj, cb);
-
-  const res = {};
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const val = obj[key];
-      if (_.isObject(val)) {
-        res[key] = mapKeysDeepLodash(val, cb);
-      } else {
-        res[key] = val;
-      }
-    }
-  }
-
-  return res;
+const mapKeyValueToObject = (cb) => (mutateObj, {key, val}) => {
+  mutateObj[cb(key)] = mapKeysDeep(cb)(val);
+  return mutateObj;
 };
+
+const mapKeysObject = (cb, obj) => Object.keys(obj).map(toKeyValuePair(obj)).reduce(mapKeyValueToObject(cb), {}); 
+
+const mapKeysDeep = (cb) => (val) => {
+  if(!val) { return val; }
+  if(isArray(val)) { return mapKeysArray(cb, val); }
+  if(isObject(val)) { return mapKeysObject(cb, val); }
+  return val;
+};
+
+const mapKeysArray = (cb, arr) => arr.map(mapKeysDeep(cb));
+
+module.exports = (callBack, value) => mapKeysDeep(callBack)(value);
