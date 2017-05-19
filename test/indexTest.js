@@ -1,9 +1,7 @@
-"use strict";
-
 const assert = require("assert");
 const expect = require("chai").expect;
 
-const mapKeysDeep = require("./");
+const mapKeysDeep = require("../lib/index");
 
 describe(".mapKeysDeep()", () => {
   expect(() => {
@@ -16,6 +14,7 @@ describe(".mapKeysDeep()", () => {
     }
     return key;
   });
+
   assert.deepEqual(foo, {a: "b", zzz: "d", e: {zzz: "f", g: {zzz: "h"}}});
 
   const bar = mapKeysDeep({a: {a: {a: "b"}}}, (value, key) => {

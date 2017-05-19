@@ -4,26 +4,33 @@
   "version": "0.2.0",
   "homepage": "https://github.com/odynvolk/map-keys-deep-lodash",
   "author": "Alexi Rahman (https://github.com/odynvolk)",
-  "repository": "odynvolk/map-keys-deep-lodash",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/odynvolk/map-keys-deep-lodash.git"
+  },
   "bugs": {
     "url": "https://odynvolk/map-keys-deep-lodash/issues"
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "lib/index.js"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && eslint . --cache"
   },
   "dependencies": {
     "lodash": "^4.11.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coffee-script": "^1.12.6",
+    "eslint": "^3.19.0",
+    "mocha": "^3.4.1",
+    "mocha-cakes-2": "^2.1.0",
     "should": "^8.3.1"
   },
   "keywords": [
