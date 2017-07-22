@@ -4,6 +4,8 @@
 Sometimes we need to map keys from an object recursively. map-keys-deep-lodash solves this and uses only lodash as external
 dependency.
 
+The code for this module uses new features in the Javascript language, but the code is transpiled by Babel to ES2015 so most projects who needs it should be able to use it.
+
 ## Install
 
 Install with [npm](https://www.npmjs.com/)

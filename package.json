@@ -20,15 +20,24 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha && eslint . --cache"
+    "test": "npm run compile && mocha && eslint . --cache",
+    "compile": "gulp",
+    "prepublish": "npm run compile"
   },
   "dependencies": {
     "lodash": "^4.11.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
     "chai": "^3.5.0",
     "coffee-script": "^1.12.6",
     "eslint": "^3.19.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "mocha": "^3.4.1",
     "mocha-cakes-2": "^2.1.0",
     "should": "^8.3.1"

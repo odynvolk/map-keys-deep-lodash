@@ -23,5 +23,6 @@ describe(".mapKeysDeep()", () => {
     }
     return key;
   });
+
   assert.deepEqual(bar, {zzz: {zzz: {zzz: "b"}}});
 });
