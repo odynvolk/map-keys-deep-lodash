@@ -1,4 +1,3 @@
-const assert = require("assert");
 const expect = require("chai").expect;
 
 const mapKeysDeep = require("../lib/index");
@@ -26,7 +25,8 @@ describe(".mapKeysDeep()", () => {
       return key;
     });
 
-    assert.deepEqual(foo, {
+    foo.should.be.ok;
+    foo.should.eql({
       a: "b",
       zzz: "d",
       e: {
@@ -51,12 +51,62 @@ describe(".mapKeysDeep()", () => {
       return key;
     });
 
-    assert.deepEqual(bar, {
+    bar.should.be.ok;
+    bar.should.eql({
       zzz: {
         zzz: {
           zzz: "b"
         }
       }
+    });
+  });
+
+  it("should not manipulate keys if there is not match", () => {
+    const bar = mapKeysDeep({
+      x: ["a", "b"]
+    }, (value, key) => {
+      if (key === "y") return "zzz";
+
+      return key;
+    });
+
+    bar.should.be.ok;
+    bar.should.eql({
+      x: ["a", "b"]
+    });
+  });
+
+  it("should return correct object with array at first level", () => {
+    const bar = mapKeysDeep({
+      x: ["a", "b"]
+    }, (value, key) => {
+      if (key === "x") return "zzz";
+
+      return key;
+    });
+
+    bar.should.be.ok;
+    bar.should.eql({
+      zzz: ["a", "b"]
+    });
+  });
+
+  it("should return correct object with array at deeper levels", () => {
+    const bar = mapKeysDeep({
+      x: {
+        y: ["a", "b"]
+      }
+
+    }, (value, key) => {
+      if (key === "y") return "zzz";
+
+      return key;
+    });
+
+    bar.should.be.ok;
+    bar.x.should.exist;
+    bar.x.should.eql({
+      zzz: ["a", "b"]
     });
   });
 });
