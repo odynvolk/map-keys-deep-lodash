@@ -1,4 +1,5 @@
 const expect = require("chai").expect;
+const { URL } = require("url");
 
 const mapKeysDeep = require("../lib/index");
 
@@ -108,5 +109,13 @@ describe(".mapKeysDeep()", () => {
     bar.x.should.eql({
       zzz: ["a", "b"]
     });
+  });
+
+  it("should return same non plain object", () => {
+    const url = new URL("http://www.google.com");
+
+    const bar = mapKeysDeep(url, () => {});
+
+    url.should.eql(bar);
   });
 });
