@@ -48,6 +48,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 ## Author
 
 + [github/odynvolk](https://github.com/odynvolk)
++ [github/goliney](https://github.com/goliney)
 
 ## License
 
