@@ -1,18 +1,27 @@
-const _ = require("lodash");
+const {isPlainObject, mapKeys, mapValues} = require("lodash");
 
-module.exports = function mapKeysDeepLodash(obj, cb) {
-  if (_.isUndefined(obj)) {
-    throw new Error(`map-keys-deep-lodash expects an object but got ${typeof obj}`);
+module.exports = function mapKeysDeepLodash(obj, cb, isRecursive) {
+  if (!obj) {
+    return {};
   }
-  if (_.isArray(obj)) {
-    return obj.map(item => mapKeysDeepLodash(item, cb));
+
+  if (!isRecursive) {
+    if (typeof obj === "string" || typeof obj === "number" || typeof obj === "boolean") {
+      return {};
+    }
   }
-  if (!_.isPlainObject(obj)) {
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => mapKeysDeepLodash(item, cb, true));
+  }
+
+  if (!isPlainObject(obj)) {
     return obj;
   }
 
-  const result = _.mapKeys(obj, cb);
-  return _.mapValues(result, value =>
-    mapKeysDeepLodash(value, cb)
+  const result = mapKeys(obj, cb);
+
+  return mapValues(result, value =>
+    mapKeysDeepLodash(value, cb, true)
   );
 };
