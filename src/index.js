@@ -1,7 +1,7 @@
 const {isPlainObject, mapKeys, mapValues} = require("lodash");
 
 module.exports = function mapKeysDeepLodash(obj, cb, isRecursive) {
-  if (!obj) {
+  if (!obj && !isRecursive) {
     return {};
   }
 

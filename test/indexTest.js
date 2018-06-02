@@ -4,6 +4,30 @@ const mapKeysDeep = require("../lib/index");
 
 describe(".mapKeysDeep()", () => {
   describe("valid mappings", () => {
+    it("should return correct object with different type of values", () => {
+      const bar = mapKeysDeep({
+        a: 1,
+        b: 0,
+        c: null,
+        d: undefined,
+        e: NaN,
+        f: false
+      }, (value, key) => {
+        return `${key}2`;
+      });
+
+      bar.should.be.ok;
+      bar.should.exist;
+      bar.should.eql({
+        a2: 1,
+        b2: 0,
+        c2: null,
+        d2: undefined,
+        e2: NaN,
+        f2: false
+      });
+    });
+
     it("should return correct object with different subkeys", () => {
       const foo = mapKeysDeep({
         a: "b",
