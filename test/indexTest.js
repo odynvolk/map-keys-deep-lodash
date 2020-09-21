@@ -16,9 +16,7 @@ describe(".mapKeysDeep()", () => {
         return `${key}2`;
       });
 
-      bar.should.be.ok;
-      bar.should.exist;
-      bar.should.eql({
+      expect(bar).to.eql({
         a2: 1,
         b2: 0,
         c2: null,
@@ -44,8 +42,7 @@ describe(".mapKeysDeep()", () => {
         return key;
       });
 
-      foo.should.be.ok;
-      foo.should.eql({
+      expect(foo).eql({
         a: "b",
         zzz: "d",
         e: {
@@ -70,8 +67,7 @@ describe(".mapKeysDeep()", () => {
         return key;
       });
 
-      bar.should.be.ok;
-      bar.should.eql({
+      expect(bar).eql({
         zzz: {
           zzz: {
             zzz: "b"
@@ -89,8 +85,7 @@ describe(".mapKeysDeep()", () => {
         return key;
       });
 
-      bar.should.be.ok;
-      bar.should.eql({
+      expect(bar).to.eql({
         x: ["a", "b"]
       });
     });
@@ -104,8 +99,7 @@ describe(".mapKeysDeep()", () => {
         return key;
       });
 
-      bar.should.be.ok;
-      bar.should.eql({
+      expect(bar).to.eql({
         zzz: ["a", "b"]
       });
     });
@@ -122,9 +116,8 @@ describe(".mapKeysDeep()", () => {
         return key;
       });
 
-      bar.should.be.ok;
-      bar.x.should.exist;
-      bar.x.should.eql({
+      expect(bar).to.exist;
+      expect(bar.x).eql({
         zzz: ["a", "b"]
       });
     });
@@ -136,7 +129,7 @@ describe(".mapKeysDeep()", () => {
 
       const bar = mapKeysDeep(something, () => {});
 
-      bar.should.eql({});
+      expect(bar).to.eql({});
     });
 
     it("should return empty object when null", () => {
@@ -144,7 +137,7 @@ describe(".mapKeysDeep()", () => {
 
       const bar = mapKeysDeep(something, () => {});
 
-      bar.should.eql({});
+      expect(bar).to.eql({});
     });
 
     it("should return empty object when string", () => {
@@ -152,7 +145,7 @@ describe(".mapKeysDeep()", () => {
 
       const bar = mapKeysDeep(something, () => {});
 
-      bar.should.eql({});
+      expect(bar).to.eql({});
     });
 
     it("should return empty object when number", () => {
@@ -160,7 +153,7 @@ describe(".mapKeysDeep()", () => {
 
       const bar = mapKeysDeep(something, () => {});
 
-      bar.should.eql({});
+      expect(bar).to.eql({});
     });
 
     it("should return empty object when boolean", () => {
@@ -168,14 +161,14 @@ describe(".mapKeysDeep()", () => {
 
       const bar = mapKeysDeep(something, () => {});
 
-      bar.should.eql({});
+      expect(bar).to.eql({});
     });
 
     it("should return same non plain object", () => {
       const url = new URL("http://www.google.com");
 
       const bar = mapKeysDeep(url, () => {});
-      url.should.eql(bar);
+      expect(url).to.eql(bar);
     });
   });
 });
