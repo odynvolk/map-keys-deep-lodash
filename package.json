@@ -1,7 +1,7 @@
 {
   "name": "map-keys-deep-lodash",
   "description": "Map/rename keys recursively with lodash as only dependency.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "homepage": "https://github.com/odynvolk/map-keys-deep-lodash",
   "author": "Alexi Rahman (https://github.com/odynvolk)",
   "repository": {
